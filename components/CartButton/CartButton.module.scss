@@ -17,6 +17,13 @@
         border-radius: 90px;
         border: none;
         cursor: pointer;
+
+        &:hover {
+            scale: 1.05;
+            transition: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+        }
     }
 
     .buttons_container {
@@ -33,6 +40,13 @@
         .plus_button {
             display: flex;
             cursor: pointer;
+
+            &:hover {
+                scale: 1.2;
+                transition: all;
+                transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+                transition-duration: 150ms;
+            }
         }
         .number {
             font-weight: 500;
@@ -53,4 +67,11 @@
     border-radius: 90px;
     border: none;
     cursor: pointer;
+
+    &:hover {
+        scale: 1.02;
+        transition: all;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+    }
 }

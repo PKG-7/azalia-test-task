@@ -2,25 +2,39 @@ import Image from 'next/image'
 import style from './CartButton.module.scss'
 import plus from '../../images/elements/plusButton.svg'
 import minus from '../../images/elements/minusButton.svg'
-import { Item } from '@/pages'
+import { Item, ItemInCart } from '@/pages'
 
-export interface ICartButton {
+interface ICartButton {
     item: Item
+    shoppingCart: ItemInCart[]
     amountToAdd: number
-    addedToCart: boolean
+    setShoppingCart: (shoppingCart: ItemInCart[]) => void
     setAmountToAdd: (amountToAdd: number) => void
-    onClickAddtoCart: (itemId: number, amountToAdd: number) => void
-    onClickRemoveFromCart: (itemId: number) => void
 }
 
 export function CartButton({
     item,
+    shoppingCart,
+    setShoppingCart,
     amountToAdd,
-    addedToCart,
     setAmountToAdd,
-    onClickAddtoCart,
-    onClickRemoveFromCart,
 }: ICartButton) {
+    const addedToCart = shoppingCart.some((x) => x.id === item.id)
+
+    const onClickAddtoCart = (itemId: number, amountToAdd: number) => {
+        const itemIndex = shoppingCart.findIndex((cartItem) => cartItem.id === itemId)
+        if (itemIndex !== -1) {
+            shoppingCart[itemIndex].amount += amountToAdd
+            setShoppingCart([...shoppingCart])
+        } else {
+            setShoppingCart([...shoppingCart, { id: itemId, amount: amountToAdd }])
+        }
+    }
+
+    const onClickRemoveFromCart = (itemId: number) => {
+        setShoppingCart(shoppingCart.filter((cartItem) => cartItem.id !== itemId))
+    }
+
     if (!addedToCart)
         return (
             <div className={style.container}>
@@ -31,6 +45,7 @@ export function CartButton({
                     >
                         В корзину
                     </button>
+
                     <div className={style.buttons_container}>
                         {amountToAdd > 1 ? (
                             <Image

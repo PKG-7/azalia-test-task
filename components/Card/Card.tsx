@@ -12,29 +12,18 @@ interface Props {
     item: Item
     shoppingCart: ItemInCart[]
     setShoppingCart: (shoppingCart: ItemInCart[]) => void
+    favorites: number[]
+    setFavorites: (favorites: number[]) => void
 }
 
-export default function Card({ item, shoppingCart, setShoppingCart }: Props) {
+export default function Card({
+    item,
+    shoppingCart,
+    setShoppingCart,
+    favorites,
+    setFavorites,
+}: Props) {
     const [amountToAdd, setAmountToAdd] = useState<number>(1)
-    const [addedToCart, setAddedToCart] = useState(false)
-
-    const onClickAddtoCart = (itemId: number, amountToAdd: number) => {
-        const itemIndex = shoppingCart.findIndex((cartItem) => cartItem.id === itemId)
-        if (itemIndex !== -1) {
-            shoppingCart[itemIndex].amount += amountToAdd
-            setShoppingCart([...shoppingCart])
-        } else {
-            setShoppingCart([...shoppingCart, { id: itemId, amount: amountToAdd }])
-        }
-        //* Убрать этот стэйт, он не нужен
-        setAddedToCart(true)
-    }
-
-    const onClickRemoveFromCart = (itemId: number) => {
-        setShoppingCart(shoppingCart.filter((cartItem) => cartItem.id !== itemId))
-        //* Убрать этот стэйт, он не нужен
-        setAddedToCart(false)
-    }
 
     return (
         <div className={style.card}>
@@ -54,13 +43,16 @@ export default function Card({ item, shoppingCart, setShoppingCart }: Props) {
             <div className={style.buttons_container}>
                 <CartButton
                     item={item}
+                    shoppingCart={shoppingCart}
+                    setShoppingCart={setShoppingCart}
                     amountToAdd={amountToAdd}
                     setAmountToAdd={setAmountToAdd}
-                    addedToCart={addedToCart}
-                    onClickAddtoCart={onClickAddtoCart}
-                    onClickRemoveFromCart={onClickRemoveFromCart}
                 />
-                <FavoriteButton />
+                <FavoriteButton
+                    item={item}
+                    setFavorites={setFavorites}
+                    favorites={favorites}
+                />
             </div>
         </div>
     )

@@ -27,12 +27,6 @@ export interface Rating {
     count: number
 }
 
-const getData = async (): Promise<Item[]> => {
-    const url = 'https://fakestoreapi.com/products'
-    const { data } = await axios.get(url)
-    return data
-}
-
 export interface ItemInCart {
     id: number
     amount: number
@@ -40,6 +34,7 @@ export interface ItemInCart {
 
 export default function Home() {
     const [shoppingCart, setShoppingCart] = useState<ItemInCart[]>([])
+    const [favorites, setFavorites] = useState<number[]>([])
 
     const { refetch, isLoading, isError, data: items } = useQuery(['items'], getData)
 
@@ -61,6 +56,12 @@ export default function Home() {
                     </div>
                 ))}
             </div>
+            <div>
+                Favorites:
+                {favorites.map((favoriteItem) => (
+                    <div key={favoriteItem}>{favoriteItem}</div>
+                ))}
+            </div>
             <div className='container'>
                 <Banner />
                 {items.map((item: Item) => (
@@ -70,10 +71,18 @@ export default function Home() {
                             item={item}
                             shoppingCart={shoppingCart}
                             setShoppingCart={setShoppingCart}
+                            favorites={favorites}
+                            setFavorites={setFavorites}
                         />
                     </div>
                 ))}
             </div>
         </MainLayout>
     )
+}
+
+const getData = async (): Promise<Item[]> => {
+    const url = 'https://fakestoreapi.com/products'
+    const { data } = await axios.get(url)
+    return data
 }
