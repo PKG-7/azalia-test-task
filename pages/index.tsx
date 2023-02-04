@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import { useState } from 'react'
 import styles from '../styles/Home.module.scss'
+import { Header } from '../components/Header/Header'
 
 export interface Item {
     id: number
@@ -48,21 +49,7 @@ export default function Home() {
 
     return (
         <MainLayout>
-            <div>
-                In cart:{' '}
-                {shoppingCart.map((cartItem) => (
-                    <div key={cartItem.id}>
-                        <p>Item ID: {cartItem.id}</p>
-                        <p>Amount: {cartItem.amount}</p>
-                    </div>
-                ))}
-            </div>
-            <div>
-                Favorites:
-                {favorites.map((favoriteItem) => (
-                    <div key={favoriteItem}>{favoriteItem}</div>
-                ))}
-            </div>
+            <Header items={items} shoppingCart={shoppingCart} favorites={favorites} />
             <div className={styles.main}>
                 <Banner />
                 {items.map((item: Item) => (

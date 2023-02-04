@@ -11,6 +11,7 @@
     justify-content: space-between;
 
     .cart_button {
+        color: white;
         width: 100px;
         height: 39.67px;
         background: #4056a1;
@@ -67,6 +68,7 @@
     border-radius: 90px;
     border: none;
     cursor: pointer;
+    color: white;
 
     &:hover {
         scale: 1.02;
