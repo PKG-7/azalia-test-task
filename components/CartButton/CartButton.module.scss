@@ -1,0 +1,13 @@
+.cart_button {
+    width: 175px;
+    height: 40px;
+
+    background: #00b177;
+    border-radius: 90px;
+    border: none;
+    cursor: pointer;
+
+    &__clicked {
+        background-color: #4056a1;
+    }
+}

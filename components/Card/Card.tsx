@@ -1,8 +1,11 @@
-import { Item } from '@/pages'
-import Image from 'next/image'
-import React from 'react'
 import style from './Card.module.scss'
-import favorite from '../../images/icons/favorite.svg'
+import { Item } from '@/pages'
+import { CartButton } from '../CartButton/CartButton'
+import { FavoriteButton } from '../FavoriteButton/FavoriteButton'
+import { HitBar } from '../HitBar/HitBar'
+import { Price } from '../Price/Price'
+import { Rating } from '../Rating/Rating'
+import { CardImage } from '../CardImage/CardImage'
 
 interface Props {
     item: Item
@@ -11,22 +14,22 @@ interface Props {
 export default function Card({ item }: Props) {
     return (
         <div className={style.card}>
-            <div className={style.container}>
-                <div className={style.container}>
-                    <Image src={item.image} width={220} height={220} alt={item.title} />
+            <HitBar count={item.rating.count} />
+            <CardImage item={item} />
+
+            <div>
+                <div className={style.category_container}>
+                    <div className={style.category}>{item.category}</div>
+                    <Rating item={item} />
                 </div>
 
-                <div>
-                    <div className={style['category']}>{item.category}</div>
-                    <div className={style['title']}>{item.title}</div>
-                    <div className={style['price']}>
-                        {item.price} ₽ <span className={style['price_sign']}>/шт.</span>
-                    </div>
-                    <div className={style['button_container']}>
-                        <button className={style['cart_button']}>В корзине</button>
-                        <Image src={favorite} alt='' />
-                    </div>
-                </div>
+                <div className={style.title}>{item.title}</div>
+                <Price price={item.price} />
+            </div>
+
+            <div className={style.buttons_container}>
+                <CartButton />
+                <FavoriteButton />
             </div>
         </div>
     )

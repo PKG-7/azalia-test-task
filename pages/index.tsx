@@ -1,3 +1,4 @@
+import Banner from '@/components/Banner/Banner'
 import Card from '@/components/Card/Card'
 import MainLayout from '@/layouts/MainLayout'
 import { useQuery } from '@tanstack/react-query'
@@ -43,11 +44,14 @@ export default function Home() {
 
     return (
         <MainLayout>
-            {items.map((item: Item) => (
-                <div>
-                    <Card key={item.id} item={item} />
-                </div>
-            ))}
+            <div className='container'>
+                <Banner />
+                {items.map((item: Item) => (
+                    <div>
+                        <Card key={item.id} item={item} />
+                    </div>
+                ))}
+            </div>
         </MainLayout>
     )
 }

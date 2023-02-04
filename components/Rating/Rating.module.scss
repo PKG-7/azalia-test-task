@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.rating {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+
+    text-align: right;
+    text-decoration-line: underline;
+
+    color: #999999;
+    cursor: pointer;
+}
