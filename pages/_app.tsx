@@ -6,7 +6,7 @@ import '../styles/globals.scss'
 import { Roboto } from '@next/font/google'
 
 const roboto = Roboto({
-    subsets: ['cyrillic'],
+    subsets: ['latin'],
     weight: ['400', '500', '700'],
     style: 'normal',
 })

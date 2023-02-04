@@ -4,11 +4,7 @@ import arrow from '../../images/elements/arrow.svg'
 import bannerOne from '../../images/banners/banner-1.png'
 import bannerTwo from '../../images/banners/banner-2.png'
 
-interface Props {
-    //   text: string;
-}
-
-export default function Banner({}: Props) {
+export default function Banner() {
     return (
         <div className={styles.card}>
             <h1 className=''>Всё для комфортной работы</h1>

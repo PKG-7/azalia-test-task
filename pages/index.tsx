@@ -4,6 +4,7 @@ import MainLayout from '@/layouts/MainLayout'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import { useState } from 'react'
+import styles from '../styles/Home.module.scss'
 
 export interface Item {
     id: number
@@ -62,7 +63,7 @@ export default function Home() {
                     <div key={favoriteItem}>{favoriteItem}</div>
                 ))}
             </div>
-            <div className='container'>
+            <div className={styles.main}>
                 <Banner />
                 {items.map((item: Item) => (
                     <div>
