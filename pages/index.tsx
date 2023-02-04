@@ -53,16 +53,14 @@ export default function Home() {
             <div className={styles.main}>
                 <Banner />
                 {items.map((item: Item) => (
-                    <div>
-                        <Card
-                            key={item.id}
-                            item={item}
-                            shoppingCart={shoppingCart}
-                            setShoppingCart={setShoppingCart}
-                            favorites={favorites}
-                            setFavorites={setFavorites}
-                        />
-                    </div>
+                    <Card
+                        key={item.id}
+                        item={item}
+                        shoppingCart={shoppingCart}
+                        setShoppingCart={setShoppingCart}
+                        favorites={favorites}
+                        setFavorites={setFavorites}
+                    />
                 ))}
             </div>
         </MainLayout>

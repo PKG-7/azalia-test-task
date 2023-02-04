@@ -24,7 +24,9 @@ export function Header({ shoppingCart, favorites, items }: IHeader) {
                 <div className={styles.favorites}>
                     Favorites:
                     {favorites.map((favoriteItem) => (
-                        <div key={favoriteItem}>{favoriteItem}</div>
+                        <div className={styles.card} key={favoriteItem}>
+                            {favoriteItem}
+                        </div>
                     ))}
                 </div>
             </div>
