@@ -3,6 +3,7 @@ import Card from '@/components/Card/Card'
 import MainLayout from '@/layouts/MainLayout'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
+import { useState } from 'react'
 
 export interface Item {
     id: number
@@ -32,7 +33,14 @@ const getData = async (): Promise<Item[]> => {
     return data
 }
 
+export interface ItemInCart {
+    id: number
+    amount: number
+}
+
 export default function Home() {
+    const [shoppingCart, setShoppingCart] = useState<ItemInCart[]>([])
+
     const { refetch, isLoading, isError, data: items } = useQuery(['items'], getData)
 
     if (isLoading) return <h1>Loading...</h1>
@@ -44,11 +52,25 @@ export default function Home() {
 
     return (
         <MainLayout>
+            <div>
+                In cart:{' '}
+                {shoppingCart.map((cartItem) => (
+                    <div key={cartItem.id}>
+                        <p>Item ID: {cartItem.id}</p>
+                        <p>Amount: {cartItem.amount}</p>
+                    </div>
+                ))}
+            </div>
             <div className='container'>
                 <Banner />
                 {items.map((item: Item) => (
                     <div>
-                        <Card key={item.id} item={item} />
+                        <Card
+                            key={item.id}
+                            item={item}
+                            shoppingCart={shoppingCart}
+                            setShoppingCart={setShoppingCart}
+                        />
                     </div>
                 ))}
             </div>
