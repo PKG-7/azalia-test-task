@@ -7,7 +7,7 @@ import bannerTwo from '../../images/banners/banner-2.png'
 export default function Banner() {
     return (
         <div className={styles.card}>
-            <h1 className=''>Всё для комфортной работы</h1>
+            <h1>Всё для комфортной работы</h1>
             <Image src={arrow} alt='' className={styles.arrow} />
             <Image src={bannerOne} alt='' className={styles.banner} />
             <Image src={bannerTwo} alt='' className={styles.banner} />
