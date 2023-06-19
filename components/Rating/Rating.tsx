@@ -1,4 +1,4 @@
-import { Item } from '@/pages'
+import { Item } from '@/types/ItemInCart'
 import style from './Rating.module.scss'
 import { Stars } from '../Stars/Stars'
 

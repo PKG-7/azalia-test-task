@@ -1,31 +1,33 @@
-import { Item } from '@/pages'
+import { Item } from '@/types/ItemInCart'
 import Image from 'next/image'
 import favorite from '../../images/elements/favorite.svg'
 import favoriteActive from '../../images/elements/favoriteActive.svg'
 import style from './FavoriteButton.module.scss'
 
 interface Props {
-    favorites: number[]
-    setFavorites: (favorites: number[]) => void
+    favorites: Item[]
+    setFavorites: (favorites: Item[]) => void
     item: Item
 }
 
 export function FavoriteButton({ favorites, setFavorites, item }: Props) {
-    const addedToFavorite = favorites.some((x) => x === item.id)
+    const addedToFavorite = favorites.some(
+        (itemInStorage) => itemInStorage.id === item.id,
+    )
 
-    const onClickAddtoFavorite = (itemId: number) => {
-        setFavorites([...favorites, itemId])
+    const onClickAddtoFavorite = (item: Item) => {
+        setFavorites([...favorites, item])
     }
 
-    const onClickRemoveFromFavorite = (itemId: number) => {
-        const filtered = favorites.filter((x) => itemId !== x)
+    const onClickRemoveFromFavorite = (item: Item) => {
+        const filtered = favorites.filter((itemInStorage) => item.id !== itemInStorage.id)
         setFavorites(filtered)
     }
 
     if (addedToFavorite)
         return (
             <Image
-                onClick={() => onClickRemoveFromFavorite(item.id)}
+                onClick={() => onClickRemoveFromFavorite(item)}
                 className={style.button}
                 src={favoriteActive}
                 alt=''
@@ -34,7 +36,7 @@ export function FavoriteButton({ favorites, setFavorites, item }: Props) {
 
     return (
         <Image
-            onClick={() => onClickAddtoFavorite(item.id)}
+            onClick={() => onClickAddtoFavorite(item)}
             className={style.button}
             src={favorite}
             alt=''

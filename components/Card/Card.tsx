@@ -1,19 +1,19 @@
-import style from './Card.module.scss'
-import { Item, ItemInCart } from '@/pages'
+import { Item, ItemInCart } from '@/types/ItemInCart'
+import { useState } from 'react'
+import { CardImage } from '../CardImage/CardImage'
 import { CartButton } from '../CartButton/CartButton'
 import { FavoriteButton } from '../FavoriteButton/FavoriteButton'
-import { HitBar } from '../HitBar/HitBar'
+import { BestsellerBar } from '../BestsellerBar/BestsellerBar'
 import { Price } from '../Price/Price'
 import { Rating } from '../Rating/Rating'
-import { CardImage } from '../CardImage/CardImage'
-import { useState } from 'react'
+import style from './Card.module.scss'
 
 interface Props {
     item: Item
     shoppingCart: ItemInCart[]
     setShoppingCart: (shoppingCart: ItemInCart[]) => void
-    favorites: number[]
-    setFavorites: (favorites: number[]) => void
+    favorites: Item[]
+    setFavorites: (favorites: Item[]) => void
 }
 
 export default function Card({
@@ -23,15 +23,15 @@ export default function Card({
     favorites,
     setFavorites,
 }: Props) {
-    const [amountToAdd, setAmountToAdd] = useState<number>(1)
+    const [amountToAdd, setAmountToAdd] = useState(1)
 
     return (
         <div className={style.card}>
-            <HitBar count={item.rating.count} />
+            <BestsellerBar count={item.rating.count} />
             <CardImage item={item} />
 
-            <div>
-                <div className={style.category_container}>
+            <div className={style.content}>
+                <div className={style.categoryContainer}>
                     <div className={style.category}>{item.category}</div>
                     <Rating item={item} />
                 </div>
@@ -40,7 +40,7 @@ export default function Card({
                 <Price price={item.price} />
             </div>
 
-            <div className={style.buttons_container}>
+            <div className={style.buttonsContainer}>
                 <CartButton
                     item={item}
                     shoppingCart={shoppingCart}
@@ -48,6 +48,7 @@ export default function Card({
                     amountToAdd={amountToAdd}
                     setAmountToAdd={setAmountToAdd}
                 />
+
                 <FavoriteButton
                     item={item}
                     setFavorites={setFavorites}

@@ -1,0 +1,44 @@
+.container {
+    background: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+        font-size: 5em;
+        font-weight: 700;
+        color: black;
+        animation: pulse 2s normal forwards;
+    }
+
+    p {
+        font-size: 1.5em;
+        font-weight: 700;
+        color: rgba(0, 0, 0, 0.726);
+        animation: pulse 2s normal forwards;
+    }
+
+    button {
+        background: rgba(57, 57, 185, 0.87);
+        margin: 1em 0;
+        padding: 1em;
+        font-size: 3em;
+        border-radius: 1em;
+        animation: pulse 2s normal forwards;
+        cursor: pointer;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

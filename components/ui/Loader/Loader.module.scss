@@ -1,0 +1,41 @@
+.container {
+    background: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+        font-size: 5em;
+        font-weight: 700;
+        color: black;
+        animation: pulse 2s infinite;
+    }
+
+    p {
+        position: absolute;
+        bottom: 3em;
+        max-width: 100vh;
+        text-align: center;
+        color: black;
+        padding: 1em;
+        font-size: 3em;
+        font-weight: 700;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    50% {
+        /* transform: scale(1.2); */
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}

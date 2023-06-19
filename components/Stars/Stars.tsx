@@ -8,9 +8,9 @@ export function Stars({ rating }: { rating: number }) {
 
     for (let i = 0; i < 5; i++) {
         if (i < rating) {
-            stars.push(<Image src={starActive} alt='' />)
+            stars.push(<Image key={i} src={starActive} alt='' />)
         } else {
-            stars.push(<Image src={starEmpty} alt='' />)
+            stars.push(<Image key={i} src={starEmpty} alt='' />)
         }
     }
 

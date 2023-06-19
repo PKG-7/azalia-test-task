@@ -2,7 +2,7 @@ import Image from 'next/image'
 import style from './CartButton.module.scss'
 import plus from '../../images/elements/plusButton.svg'
 import minus from '../../images/elements/minusButton.svg'
-import { Item, ItemInCart } from '@/pages'
+import { Item, ItemInCart } from '@/types/ItemInCart'
 
 interface ICartButton {
     item: Item
@@ -27,7 +27,7 @@ export function CartButton({
             shoppingCart[itemIndex].amount += amountToAdd
             setShoppingCart([...shoppingCart])
         } else {
-            setShoppingCart([...shoppingCart, { id: itemId, amount: amountToAdd }])
+            setShoppingCart([...shoppingCart, { ...item, amount: amountToAdd }])
         }
     }
 
@@ -35,48 +35,49 @@ export function CartButton({
         setShoppingCart(shoppingCart.filter((cartItem) => cartItem.id !== itemId))
     }
 
-    if (!addedToCart)
-        return (
-            <div className={style.container}>
-                <div className={style.background}>
-                    <button
-                        onClick={() => onClickAddtoCart(item.id, amountToAdd)}
-                        className={style.cart_button}
-                    >
-                        В корзину
-                    </button>
+    return (
+        <div className={style.container}>
+            <div className={style.background}>
+                {!addedToCart ? (
+                    <>
+                        <button
+                            onClick={() => onClickAddtoCart(item.id, amountToAdd)}
+                            className={style.cart_button}
+                        >
+                            В корзину
+                        </button>
 
-                    <div className={style.buttons_container}>
-                        {amountToAdd > 1 ? (
+                        <div className={style.buttons_container}>
+                            {amountToAdd > 1 ? (
+                                <Image
+                                    onClick={() => setAmountToAdd(amountToAdd - 1)}
+                                    className={style.plus_button}
+                                    src={minus}
+                                    alt=''
+                                />
+                            ) : (
+                                <Image className={style.plus_button} src={minus} alt='' />
+                            )}
+
+                            <div className={style.number}>{amountToAdd}</div>
+
                             <Image
-                                onClick={() => setAmountToAdd(amountToAdd - 1)}
+                                onClick={() => setAmountToAdd(amountToAdd + 1)}
                                 className={style.plus_button}
-                                src={minus}
+                                src={plus}
                                 alt=''
                             />
-                        ) : (
-                            <Image className={style.plus_button} src={minus} alt='' />
-                        )}
-
-                        <div className={style.number}>{amountToAdd}</div>
-
-                        <Image
-                            onClick={() => setAmountToAdd(amountToAdd + 1)}
-                            className={style.plus_button}
-                            src={plus}
-                            alt=''
-                        />
-                    </div>
-                </div>
+                        </div>
+                    </>
+                ) : (
+                    <button
+                        onClick={() => onClickRemoveFromCart(item.id)}
+                        className={style.cart_button__clicked}
+                    >
+                        В корзине
+                    </button>
+                )}
             </div>
-        )
-
-    return (
-        <button
-            onClick={() => onClickRemoveFromCart(item.id)}
-            className={style.cart_button__clicked}
-        >
-            В корзине
-        </button>
+        </div>
     )
 }

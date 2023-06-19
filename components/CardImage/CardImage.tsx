@@ -1,4 +1,4 @@
-import { Item } from '@/pages'
+import { Item } from '@/types/ItemInCart'
 import Image from 'next/image'
 import style from './CardImage.module.scss'
 
